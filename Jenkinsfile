@@ -879,12 +879,13 @@ default, reevaluation-process, ServiceAccount (v1) has been added:
 +     helm.sh/hook: pre-install,pre-upgrade
 +     helm.sh/hook-weight: "-10"
 """
+     msg =  getUpdates(dif, params.whitelist)
+     println("msg: " + msg)
 
       try {
         // writeFile file: 'dif.txt', text: dif
         // MSG=sh(script: "./get_updates.sh '${params.REPOS_WHITELIST}' dif.txt", returnStdout: true).trim()
         // sh(script: "rm dif.txt")
-     getUpdates(dif)
       } catch (err) {
           // slackSend (color: 'bad', message: err, channel: 'C05D3AJB371')
       }

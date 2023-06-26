@@ -884,9 +884,9 @@ default, reevaluation-process, ServiceAccount (v1) has been added:
         // writeFile file: 'dif.txt', text: dif
         // MSG=sh(script: "./get_updates.sh '${params.REPOS_WHITELIST}' dif.txt", returnStdout: true).trim()
         // sh(script: "rm dif.txt")
-        MSG = getUpdates(dif)
+     getUpdates(dif)
       } catch (err) {
-          slackSend (color: 'bad', message: err, channel: 'C05D3AJB371')
+          // slackSend (color: 'bad', message: err, channel: 'C05D3AJB371')
       }
     }
 

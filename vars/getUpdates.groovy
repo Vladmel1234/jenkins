@@ -1,13 +1,9 @@
-
-
 def call(String dif, String white_list) {
-    
 
-   pegs = sh'''
+    def pegs = sh(script: '''
           declare -a array
           prev=""
           next=""
-
 
           while IFS= read -r line
           do 
@@ -27,7 +23,6 @@ def call(String dif, String white_list) {
               fi
           done < <(echo "$dif" | grep '^[+-]' | grep "$white_list" | grep -v 'image' | grep [0-9] | sort -k2)
 
-
           for element in "${array[@]}"; do
               service=$(echo "$element" | awk -F ":" '{print $1}' | tr -d '[:space:]')
               tags=$(echo "$element" | awk -F ":" '{print $2}')
@@ -44,7 +39,7 @@ def call(String dif, String white_list) {
               echo "${service}:${localnext} ${pegs_strings}"
               rm -rf $service.git
           done
-    '''
+    ''', returnStdout: true).trim()
     println(pegs)
     return pegs
 }

@@ -1,6 +1,6 @@
 def call(String dif, String white_list) {
 
-    def pegs = sh(script: '''
+   def pegs = sh(script: '''bash -c '
           declare -a array
           prev=""
           next=""
@@ -21,7 +21,7 @@ def call(String dif, String white_list) {
                   # Update the value at the last index with the "next" tag
                   array[$lastIndex]="${array[lastIndex]}$next"
               fi
-          done < <(echo "$dif" | grep '^[+-]' | grep "$white_list" | grep -v 'image' | grep [0-9] | sort -k2)
+          done < (echo "$dif" | grep '^[+-]' | grep "$white_list" | grep -v 'image' | grep [0-9] | sort -k2)
 
           for element in "${array[@]}"; do
               service=$(echo "$element" | awk -F ":" '{print $1}' | tr -d '[:space:]')
@@ -39,7 +39,7 @@ def call(String dif, String white_list) {
               echo "${service}:${localnext} ${pegs_strings}"
               rm -rf $service.git
           done
-    ''', returnStdout: true).trim()
+    ' ''', returnStdout: true).trim()
     println(pegs)
     return pegs
 }

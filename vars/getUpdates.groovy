@@ -7,7 +7,7 @@ def call(String dif, String white_list) {
 
           while IFS= read -r line
           do 
-              if [[ $line =~ ^\-.* ]]; then
+              if [[ $line =~ ^\\-.* ]]; then
                   # Get the service from the line
                   key=$(echo $line | awk -F ":" '{print $1}' | sed 's/^-//' | tr '[:upper:]' '[:lower:]' | sed 's/_ver_latest//g' | sed 's/_/-/g')
                   # Get the previous tag from the line

@@ -34,7 +34,7 @@ def call(String dif, String white_list) {
               git clone --bare  --no-checkout --single-branch --branch master "git@bitbucket.org:panorays/${service}.git"
               cd $service.git
 
-              pegs_strings=$(echo $(git log --pretty=format:"%s" "v$localnext"..."v$localprev" | grep -o "PEG-[0-9]\+" |  tr ' ' '\n' | sort | uniq | awk '{print "https://panorays.atlassian.net/browse/"$0}'))
+              pegs_strings=$(echo $(git log --pretty=format:"%s" "v$localnext"..."v$localprev" | grep -o "PEG-[0-9]\\+" |  tr ' ' '\\n' | sort | uniq | awk '{print "https://panorays.atlassian.net/browse/"$0}'))
               cd ..
               echo "${service}:${localnext} ${pegs_strings}"
               rm -rf $service.git

@@ -3,7 +3,7 @@
 def call(String dif, String white_list) {
     
 
-  def output=sh '''
+   pegs = sh'''
           declare -a array
           prev=""
           next=""
@@ -45,6 +45,6 @@ def call(String dif, String white_list) {
               rm -rf $service.git
           done
     '''
-    println(output)
-    return output
+    println(pegs)
+    return pegs
 }

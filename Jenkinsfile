@@ -1,4 +1,4 @@
-@Library('getUpdates.groovy') _
+
 node {
     stage('Get services') {
  dif = """
@@ -891,6 +891,6 @@ default, reevaluation-process, ServiceAccount (v1) has been added:
     }
 
     stage('notify with slack') {
-        slackSend (color: 'good', message: MSG, channel: 'C05D3AJB371')
+        // slackSend (color: 'good', message: MSG, channel: 'C05D3AJB371')
     }
 }

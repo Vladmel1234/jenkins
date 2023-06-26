@@ -7,7 +7,7 @@ def call(String dif, String white_list) {
 
           while IFS= read -r line
           do 
-              if [[ $line =~ ^\\-.* ]]; then
+              if [[ $line =~ ^\-.* ]]; then
                   # Get the service from the line
                   key=$(echo $line | awk -F ":" '{print $1}' | sed 's/^-//' | tr '[:upper:]' '[:lower:]' | sed 's/_ver_latest//g' | sed 's/_/-/g')
                   # Get the previous tag from the line
@@ -34,7 +34,7 @@ def call(String dif, String white_list) {
               git clone --bare  --no-checkout --single-branch --branch master "git@bitbucket.org:panorays/${service}.git"
               cd $service.git
 
-              pegs_strings=$(echo $(git log --pretty=format:"%s" "v$localnext"..."v$localprev" | grep -o "PEG-[0-9]\\+" |  tr ' ' '\\n' | sort | uniq | awk '{print "https://panorays.atlassian.net/browse/"$0}'))
+              pegs_strings=$(echo $(git log --pretty=format:"%s" "v$localnext"..."v$localprev" | grep -o "PEG-[0-9]\+" |  tr ' ' '\\n' | sort | uniq | awk '{print "https://panorays.atlassian.net/browse/"$0}'))
               cd ..
               echo "${service}:${localnext} ${pegs_strings}"
               rm -rf $service.git

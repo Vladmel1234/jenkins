@@ -21,7 +21,7 @@ def call(String dif, String white_list) {
                   # Update the value at the last index with the "next" tag
                   array[$lastIndex]="${array[lastIndex]}$next"
               fi
-          done < (echo "$dif" | grep '^[+-]' | grep "$white_list" | grep -v 'image' | grep [0-9] | sort -k2)
+          done < <(echo "$dif" | grep '^[+-]' | grep "$white_list" | grep -v 'image' | grep [0-9] | sort -k2)
 
           for element in "${array[@]}"; do
               service=$(echo "$element" | awk -F ":" '{print $1}' | tr -d '[:space:]')

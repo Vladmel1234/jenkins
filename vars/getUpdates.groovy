@@ -1,9 +1,9 @@
 
 
 def call(String dif, String white_list) {
-  println "Getting updates from $dif"
+    
 
-     return shellStdout(script: """
+  def output=sh '''
           declare -a array
           prev=""
           next=""
@@ -44,5 +44,7 @@ def call(String dif, String white_list) {
               echo "${service}:${localnext} ${pegs_strings}"
               rm -rf $service.git
           done
-    """)
+    '''
+    println(output)
+    return output
 }

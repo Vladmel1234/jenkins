@@ -1,10 +1,10 @@
 
 node {
     stage('Fetch Script') {
-        steps {
+
             // Checkout the source code from SCM
             checkout scm
-        }
+
     }
     stage('Get services') {
  dif = """

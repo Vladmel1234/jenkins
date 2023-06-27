@@ -886,7 +886,9 @@ default, reevaluation-process, ServiceAccount (v1) has been added:
 +     helm.sh/hook-weight: "-10"
 """
     cd ${WORKSPACE}
-     msg =  ./getUpdates(dif, params.whitelist)
+     sh"""
+     ./getUpdates dif params.whitelist
+     """
      println("msg: " + msg)
 
       try {

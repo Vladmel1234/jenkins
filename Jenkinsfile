@@ -885,8 +885,8 @@ default, reevaluation-process, ServiceAccount (v1) has been added:
 +     helm.sh/hook: pre-install,pre-upgrade
 +     helm.sh/hook-weight: "-10"
 """
-    cd ${WORKSPACE}
      sh"""
+      cd ${WORKSPACE}
      ./getUpdates dif params.whitelist
      """
      println("msg: " + msg)

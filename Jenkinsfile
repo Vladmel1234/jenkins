@@ -1,5 +1,11 @@
 
 node {
+    stage('Fetch Script') {
+        steps {
+            // Checkout the source code from SCM
+            checkout scm
+        }
+    }
     stage('Get services') {
  dif = """
 default, active-inquiry-notification-suppliers, CronJob (batch) has changed:
@@ -879,7 +885,8 @@ default, reevaluation-process, ServiceAccount (v1) has been added:
 +     helm.sh/hook: pre-install,pre-upgrade
 +     helm.sh/hook-weight: "-10"
 """
-     msg =  getUpdates(dif, params.whitelist)
+    cd ${WORKSPACE}
+     msg =  ./getUpdates(dif, params.whitelist)
      println("msg: " + msg)
 
       try {

@@ -887,6 +887,7 @@ default, reevaluation-process, ServiceAccount (v1) has been added:
 """
      sh"""
       cd ${WORKSPACE}
+      ls -la
      ./getUpdates dif params.whitelist
      """
      println("msg: " + msg)

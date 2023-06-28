@@ -884,18 +884,19 @@ default, reevaluation-process, ServiceAccount (v1) has been added:
 +     iam.gke.io/gcp-service-account: pws-common-cronjob@panorays-main.iam.gserviceaccount.com
 +     helm.sh/hook: pre-install,pre-upgrade
 +     helm.sh/hook-weight: "-10"
-"""
-     sh"""
-      cd ${WORKSPACE}
-      ls -la
-     ./getUpdates dif params.whitelist
-     """
-     println("msg: " + msg)
+""" 
+    // writeFile file: 'dif.txt', text: dif
+    // msg = sh """
+    // cd ${WORKSPACE}
+    // ./get_updates.sh dif.txt
+    // """
+    // rm dif.txt
+    //  println("msg: " + msg)
 
       try {
-        // writeFile file: 'dif.txt', text: dif
-        // MSG=sh(script: "./get_updates.sh '${params.REPOS_WHITELIST}' dif.txt", returnStdout: true).trim()
-        // sh(script: "rm dif.txt")
+        writeFile file: 'dif.txt', text: dif
+        MSG=sh(script: "./shell_scripts/get_updates.sh dif.txt", returnStdout: true).trim()
+        sh(script: "rm dif.txt")
       } catch (err) {
           // slackSend (color: 'bad', message: err, channel: 'C05D3AJB371')
       }
